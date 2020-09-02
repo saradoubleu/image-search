@@ -1,6 +1,6 @@
 ## Image Discovery Application
+<a href="https://github.com/saradoubleu/image-search/"><img src="https://github.com/saradoubleu/image-search/blob/master/imagedisc.png"></a>
 
-<a href="Screen Shot 2020-09-02 at 2.49.47 PM.png?s=200" title="Image Discovery App" alt="image discovery app"></a>
 
 An image search application using the Shutterstock image library
 
