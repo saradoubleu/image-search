@@ -1,0 +1,12 @@
+.search-bar-wrapper {
+  margin: auto;
+  width: 80%;
+}
+
+.search-input {
+  width: 80%;
+}
+
+.submit-button {
+  height: 100%;
+}

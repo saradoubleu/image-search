@@ -5,7 +5,7 @@ class ImageBlock extends Component {
     const { description } = this.props.image;
     return (
       <div className="image-block">
-        <img alt={description} src={this.props.image.assets.small_thumb.url} />
+        <img alt={description} src={this.props.image.assets.large_thumb.url} />
       </div>
     );
   }

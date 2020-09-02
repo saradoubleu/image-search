@@ -7,13 +7,28 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+import SearchCategory from "../SearchCategory/SearchCategory";
+import "./SearchBar.css";
 
 class SearchBar extends Component {
-  state = { searchTerm: "" };
+  state = {
+    searchTerm: "",
+    categories: [],
+  };
+
+  async getCategories() {
+    const request = await axios.get("/v2/images/categories", {});
+    this.setState({ categories: request });
+    // console.log("YOOO: ", this.state.categories.data);
+  }
+
+  componentDidMount() {
+    this.getCategories();
+  }
 
   onFormSubmit(event) {
     event.preventDefault();
-    console.log(this.state.searchTerm);
+    // console.log(this.state.searchTerm);
     this.props.onSubmit(this.state.searchTerm);
   }
 
@@ -23,7 +38,9 @@ class SearchBar extends Component {
         <form onSubmit={(event) => this.onFormSubmit(event)}>
           <span>
             <TextField
-              id="standard-basic"
+              id="outlined-basic"
+              variant="outlined"
+              className="search-input"
               label="Search for images"
               type="text"
               value={this.state.searchTerm}
@@ -31,28 +48,11 @@ class SearchBar extends Component {
             ></TextField>
           </span>
           {/* <span>
-            <FormControl variant="outlined">
-              <InputLabel id="demo-simple-select-outlined-label">
-                Age
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value="test"
-                // onChange={handleChange}
-                label="Category"
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+            <SearchCategory category={this.state.categories} />
           </span> */}
           <span>
             <Button
+              className="submit-button"
               variant="contained"
               color="primary"
               onClick={(event) => this.onFormSubmit(event)}
