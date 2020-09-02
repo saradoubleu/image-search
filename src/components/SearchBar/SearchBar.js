@@ -50,7 +50,7 @@ class SearchBar extends Component {
           {/* <span>
             <SearchCategory category={this.state.categories} />
           </span> */}
-          <span>
+          <span className="button-span">
             <Button
               className="submit-button"
               variant="contained"

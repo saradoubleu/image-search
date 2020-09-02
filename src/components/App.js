@@ -8,12 +8,15 @@ export default class App extends Component {
   state = { images: [] };
 
   onSearchSubmit = async (searchTerm) => {
-    const request = await axios.get("/v2/images/search", {
-      params: {
-        query: searchTerm,
-      },
-    });
-
+    const request = await axios
+      .get("/v2/images/search", {
+        params: {
+          query: searchTerm,
+        },
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     this.setState({ images: request.data });
   };
 
