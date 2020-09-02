@@ -1,21 +1,29 @@
-import React, { Component, useEffect } from "react";
-import { SearchBar } from "./SearchBar/SearchBar";
+import React, { Component } from "react";
+import SearchBar from "./SearchBar/SearchBar";
 import axios from "../api/shutterstock";
+import SearchResults from "./SearchResults/SearchResults";
 
-function App() {
-  useEffect(() => {
-    async function fetchImages() {
-      const request = await axios.get("/v2/images/search?query=pig");
-      console.log("**** ", request);
-    }
-    fetchImages();
-  }, []);
+export default class App extends Component {
+  state = { images: [] };
 
-  return (
-    <div>
-      TEST
-      <SearchBar />
-    </div>
-  );
+  onSearchSubmit = async (searchTerm) => {
+    const request = await axios.get("/v2/images/search", {
+      params: {
+        query: searchTerm,
+      },
+    });
+
+    this.setState({ images: request.data });
+    // console.log("images", request.data);
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Image Discovery</h1>
+        <SearchBar onSubmit={this.onSearchSubmit} />
+        <SearchResults images={this.state.images} />
+      </div>
+    );
+  }
 }
-export default App;
